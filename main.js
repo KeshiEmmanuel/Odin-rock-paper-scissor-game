@@ -1,12 +1,19 @@
+let computerScore = 0;
+let userScore = 0;
 function Game() {
   alert("Lets play Rock,paper, scissors");
+  StartGame();
+
   if (!StartGame()) {
-    confirm("Would you like to play again?");
-    if (true) {
+    const gameRestart = confirm("Would you like to play again?");
+    if (!gameRestart) {
+      alert(
+        `Thanks for playing Your score is ${userScore} while AI is ${computerScore}`
+      );
+    } else {
       Game();
     }
   }
-  return StartGame();
 }
 Game();
 
@@ -27,7 +34,6 @@ function MainGame() {
   const computerRandomChoices = Math.floor(
     Math.random() * computerGameMaterial.length
   );
-
   const computerChoice = computerGameMaterial[computerRandomChoices];
 
   //User Choices
@@ -47,14 +53,27 @@ function MainGame() {
   function gameLogic() {
     if (userChoice === "paper" && computerChoice === "rock") {
       alert(`You Win! AI selected ${computerChoice}`);
+      userScore++;
     } else if (computerChoice === "paper" && userChoice === "scissors") {
       alert(`You Win! AI selected ${computerChoice}`);
+      userScore++;
     } else if (computerChoice === "scissors" && userChoice === "rock") {
       alert(`You Win! AI Selected ${computerChoice}`);
+      userScore++;
+    } else if (computerChoice === "rock" && userChoice === "scissors") {
+      alert(`Ai wins You selceted ${userChoice}`);
+      computerScore++;
+    } else if (computerChoice === "scissors" && userChoice === "paper") {
+      alert(`Ai wins, You selected ${userChoice}`);
+      computerScore++;
+    } else if (computerChoice === "paper" && userChoice === "rock") {
+      alert(`Ai wins You selected ${userChoice}`);
     } else if (computerChoice === userChoice) {
       alert(
         `Its a tie you selected ${userChoice} while AI selected ${computerChoice}`
       );
+      userScore++;
+      computerScore++;
     }
   }
   gameLogic();
